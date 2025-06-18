@@ -114,14 +114,6 @@ npm run dev
 
 ---
 
-## 🖼️ Screenshots (Optional)
-
-| Dashboard | Meeting | Edit Profile |
-|-----------|---------|--------------|
-| ![dashboard](screenshots/dashboard.png) | ![meeting](screenshots/meeting.png) | ![profile](screenshots/profile.png) |
-
----
-
 ## 🧠 Notes
 
 - Buttons like **Create/Join** are disabled until title is filled
