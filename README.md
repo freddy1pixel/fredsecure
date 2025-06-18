@@ -26,29 +26,117 @@ Fred Secure Meetings is a modern, secure, and Google Meet–styled video confere
 | Auth        | JWT (stored in `localStorage`)          |
 | Video Calls | Jitsi Meet (embedded in React)          |
 
-
-
-## 🔧 Installation
-
-### 1. Clone the repo
-```bash
-git clone https://github.com/your-username/fred-secure-meetings.git
-cd fred-secure-meetings
-
-
-
 ---
 
 ## 🧩 Project Structure
 
+```
 fred-secure-meetings/
-├── backend/              # Express backend + SQLite
-├── frontend/             # React + Tailwind + Vite
-├── database/fredsecure.db  # SQLite file (auto-created if missing)
+├── backend/              # Express backend
+│   ├── routes/           # Auth, user, meeting APIs
+│   └── db/               # SQLite setup
+├── frontend/             # React app with Tailwind
+│   ├── pages/            # Login, Register, Dashboard, VideoRoom, etc.
+│   └── components/       # Navbar, ProfileModal, etc.
+├── database/
+│   └── fredsecure.db     # SQLite database file
+├── public/               # Logo, favicon, assets
 └── README.md
+```
 
-## Front End Setup
+---
 
+## ⚙️ Installation Guide
 
+### Prerequisites
 
+- Node.js ≥ 18.x
+- npm
+- SQLite (preinstalled)
+- (Optional) Your own Jitsi server
 
+---
+
+### 🖥 Backend Setup
+
+```bash
+cd backend
+npm install
+node app.js
+```
+
+> Runs on: `http://localhost:5000`  
+> DB: `fredsecure.db` auto-generated if missing
+
+---
+
+### 💻 Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+> Vite dev server: `http://localhost:5173`  
+> Communicates with backend via relative `/api` routes
+
+---
+
+## 📡 API Summary
+
+### Auth
+
+- `POST /api/register` — `{ name, email, password }`
+- `POST /api/login` — `{ email, password }`
+
+### Meetings
+
+- `POST /api/meetings/schedule` — `{ title, datetime, duration }`
+- `GET /api/meetings/upcoming`
+- `GET /api/meetings/past`
+- `GET /api/meetings/stats`
+
+### User
+
+- `POST /api/users/update-profile` — `{ name, avatarUrl }`
+
+---
+
+## 🛠 Deployment Tips
+
+- Point your custom domain (e.g., `meet.fredsecure.xyz`) to a VPS
+- Install and run a Jitsi Docker stack or `apt`-based Jitsi instance
+- Update the frontend's `VideoRoom.jsx` to use your domain:
+  ```js
+  const domain = "meet.fredsecure.xyz";
+  ```
+
+---
+
+## 🖼️ Screenshots (Optional)
+
+| Dashboard | Meeting | Edit Profile |
+|-----------|---------|--------------|
+| ![dashboard](screenshots/dashboard.png) | ![meeting](screenshots/meeting.png) | ![profile](screenshots/profile.png) |
+
+---
+
+## 🧠 Notes
+
+- Buttons like **Create/Join** are disabled until title is filled
+- Profile modal allows image/name change and persists to DB
+- Past meetings show "Transcript" instead of rejoin options
+- Forgot Password is handled via email (pending setup)
+
+---
+
+## 🧑‍💻 Author
+
+Built by Fred Acheampong • Inspired by Google Meet
+
+---
+
+## 🪪 License
+
+MIT — free to use, modify, and deploy
